@@ -1,0 +1,148 @@
+<h1>Factlab Database Update Form</h1>
+
+<form action="addrecord" method="post">
+
+    {%csrf_token%}
+    
+    <table border="1" cellspacing="10">
+        <tr>
+            <td>Project</td>
+            <td><select id="project" name="project">
+                <option value="Facebook">Facebook</option>
+                <option value="Election">Election</option>
+                <option value="Climate">Climate</option>
+                <option value="Tipline">Tipline</option>
+              </select>
+              </td>
+
+        <tr>
+            <td>Source</td>
+            <td>
+                <select id="source" name="source">
+                <option value="Facebook">Facebook</option>
+                <option value="Twitter">Twitter</option>
+                <option value="Instagtam">Instagtam</option>
+                <option value="Email">Email</option>
+                <option value="YouTube">YouTube</option>
+                <option value="TikTok">TikTok</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Claim</td>
+            <td><textarea name = 'claim' rows="5" cols="20"></textarea></td>
+        </tr>
+        <tr>
+            <td>Date claim was made</td>
+            <td><input type="date" id="claim_published" name="claim_published"></td>
+        </tr>
+        <tr>
+            <td>Date claim was received</td>
+            <td><input type="date" id="claim_received" name="claim_received"></td>
+        </tr>
+        <tr>
+            <td>Description</td>
+            <td><textarea name = 'description' rows="5" cols="20" required></textarea></td>
+        </tr>
+        <tr>
+            <td>Verdict</td>
+            <td>
+                <select id="verdict" name="verdict">
+                <option value=TRUE>TRUE</option>
+                <option value=FALSE>FALSE</option>
+                <option value="UNKNOWN">UNKNOWN</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Media Type</td>
+            <td>
+                <select id="mediatype" name="mediatype">
+                <option value='Video'>Video</option>
+                <option value='Audio'>Audio</option>
+                <option value="Tweet">Tweet</option>
+                <option value="Audio">Audio</option>
+                <option value="Pamphlet">Pamphlet</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Media URL</td>
+            <td>
+                <input type="text" id="media_link_int" name="media_link_int" placeholder="https://"><br>
+            </td>
+        </tr>
+        <tr>
+            <td>Claimant</td>
+            <td>
+                <input type="text" id="claimant" name="claimant" ><br>
+            </td>
+        </tr>
+        <tr>
+            <td>Party</td>
+            <td>
+                <input type="text" id="party" name="party" ><br>
+            </td>
+        </tr>
+        <tr>
+            <td>Topic</td>
+            <td>
+                <input type="text" id="topic" name="topic" ><br>
+            </td>
+        </tr>
+        <tr>
+            <td>Sub category</td>
+            <td>
+                <input type="text" id="subcategory" name="subcategory" ><br>
+            </td>
+        </tr>
+        <tr>
+            <td>Link to source</td>
+            <td>
+                <input type="text" id="media_link_ext" name="media_link_ext" placeholder = 'https://'><br>
+            </td>
+        </tr>
+        <tr>
+            <td>Who lodged info</td>
+            <td>
+                <input type="text" id="wholodgeinfo" name="wholodgeinfo"><br>
+            </td>
+        </tr>
+        <tr>
+            <td>Status</td>
+            <td>
+                <select id="status" name="status">
+                <option value='Checked'>Checked</option>
+                <option value='Unchecked'>Unchecked</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Name of Checker</td>
+            <td>
+                <input type="text" id="checkername" name="checkername"><br>
+            </td>
+        </tr>
+        <tr>
+            <td>ID of Checker</td>
+            <td>
+                <input type="text" id="checkerid" name="checkerid" required><br>
+            </td>
+        </tr>
+        <tr>
+            <td>Verdict Simplified</td>
+            <td>
+                <select id="verdictsimplified" name="verdictsimplified">
+                <option value='Positive'>Positive</option>
+                <option value='Negative'>Negative</option>
+                <option value='In_Between'>In Between</option>
+                </select>
+            </td>
+        </tr>
+
+    </table>
+    <input type="submit" value="submit">   
+
+</form>
+
+<h2><a href="/home">Home</a></h2>
