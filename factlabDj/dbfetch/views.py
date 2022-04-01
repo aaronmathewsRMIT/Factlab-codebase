@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from dbupdate.models import individual, claim, factchecker
+from dbupdate.models import claim
 
 from django.db import connection
 

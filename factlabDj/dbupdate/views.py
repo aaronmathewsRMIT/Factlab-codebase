@@ -1,7 +1,7 @@
 import re
 from django.shortcuts import render, redirect
 from numpy import source
-from .models import individual, factchecker, claim
+from .models import claim
 from django.db.models import Count
 
 # Create your views here.
@@ -16,6 +16,7 @@ def add_record(request):
         claim_source = request.POST.get('source')
         claim1 = request.POST.get('claim')
         claim_published = request.POST.get('claim_published')
+        print(claim_published)
         claim_received = request.POST.get('claim_received')
         description = request.POST.get('description')
         verdict = request.POST.get('verdict')
@@ -28,42 +29,11 @@ def add_record(request):
         media_link_ext = request.POST.get('media_link_ext')
         wholodgeinfo = request.POST.get('wholodgeinfo')
         status = request.POST.get('status')
-        checkername = request.POST.get('checkername')
-        checkerid = request.POST.get('checkerid')
+        checker_name = request.POST.get('checkername')
         verdictsimplified = request.POST.get('verdictsimplified')
-        e = individual()
-        f = factchecker()
         c = claim()
 
-        
-
-        # counting
-        c_count = individual.objects.all().filter(claimant=claimant,party=party).aggregate(Count('individual_id'))
-        if c_count['individual_id__count'] ==0:
-            print('Yes1')
-            e.claimant = claimant.upper()
-            e.party = party.upper()
-            e.save()
-            c.individual_id = e
-        
-        else:
-            a = individual.objects.all().values('individual_id').filter(claimant=claimant,party=party)
-            temp_obj =individual.objects.get(pk=a[0]['individual_id'])
-            c.individual_id= temp_obj
-            #print(temp_obj)
-
-        #factcheckers
-        f_count = factchecker.objects.all().filter(checker_id=checkerid).aggregate(Count('checker_id'))
-        if f_count['checker_id__count'] ==0:
-            print('Yes2')
-            f.checker_id = checkerid.upper()
-            f.checker_name = checkername.upper()
-            f.save()
-            c.checker_id = f
-        else:
-            f_count = factchecker.objects.all().values('checker_id').filter(checker_id=checkerid)
-            temp_obj =factchecker.objects.get(pk=f_count[0]['checker_id'])
-            c.checker_id = temp_obj
+     
 
 
         #claim table
@@ -76,11 +46,14 @@ def add_record(request):
         c.verdict = verdict.upper()
         c.media_type = mediatype.upper()
         c.media_link_path = media_link_int
+        c.claimant = claimant.upper()
+        c.party = party.upper()
         c.topic = topic.upper()
         c.sub_category = subcategory.upper()
         c.source_link = media_link_ext
         c.who_lodged_info = wholodgeinfo.upper()
         c.status = status.upper()
+        c.checker_name = checker_name.upper()
         c.verdict_simplified = verdictsimplified.upper()
 
         c.save()        
