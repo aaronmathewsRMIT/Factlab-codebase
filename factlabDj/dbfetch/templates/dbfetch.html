@@ -7,7 +7,8 @@
     <table border="1" cellspacing="10">
         <tr>
             <td>Project</td>
-            <td><select id="project" name="project" multiple>
+            <td><select id="project" name="project" multiple required>
+                <option value="ANY">Any</option>
                 <option value="FACEBOOK">Facebook</option>
                 <option value="ELECTION">Election</option>
                 <option value="CLIMATE">Climate</option>
@@ -16,8 +17,9 @@
             </td>
             <td>Source</td>
             <td>
-                <select id="source" name="source" multiple>
-                <option value="FACBOOK">Facebook</option>
+                <select id="source" name="source" multiple required>
+                <option value="ANY">Any</option>
+                <option value="FACEBOOK">Facebook</option>
                 <option value="TWITTER">Twitter</option>
                 <option value="INSTAGRAM">Instagtam</option>
                 <option value="EMAIL">Email</option>
@@ -73,8 +75,8 @@
         </tr>
         <tr>
             <td>Date claim was made</td>
-            <td><input type="date" id="claim_published_from" name="claim_published_from" required> From</td>
-            <td><input type="date" id="claim_published_to" name="claim_published_to" required>To</td>
+            <td><input type="datetime-local" id="claim_published_from" name="claim_published_from" required> From</td>
+            <td><input type="datetime-local" id="claim_published_to" name="claim_published_to" required>To</td>
         </tr>
 
 

@@ -1,17 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"  href="./../static/css/style.css">
+
     <title>Document</title>
+    <style>
+        table {
+          border-collapse: collapse;
+          border-spacing: 0;
+          width: 100%;
+          border: 1px solid black;
+          border-style: solid;
+        }
+        
+        th, td {
+          text-align: left;
+          padding: 8px;
+          border: 1px solid black;
+          border-radius: 25px;
+          border-style: solid;
+        }
+        
+        </style>
 </head>
 <body>
-    {%for i in el%}
+    <div style="overflow-x:auto;">
+        <table height = 100px; width =1000px class="rwd-table">
+            <tr width="10%">
+                <th>Claim ID</th>
+                <th>Project</th>
+                <th>Claim Source</th>
+                <th>Claim</th>
+                <th>Claim publish date</th>
+                <th>Description</th>
+                <th>Verdict</th>
+                <th>Claimant</th>
+                <th>Party</th>
+                <th>Topic</th>
+                <th>Subcategory</th>
+                <th>Source link</th>
+                <th>Verified Simplified</th>
+            </tr>
+            {%for i in body%}
+            <tr>    
+                <td>{{i.claim_id}}</td>
+                <td>{{i.project}}</td>
+                <td>{{i.claim_source}}</td>
+                <td style="height:100px;width:5000px">{{i.claim}}</td>
+                <td style="width:110px"><time datetime="DD-MM-YYYY hh:mm">{{i.claim_publish_date}}</time></td>
+                <td style="height:100px; width:100px"><div class=scrollable>{{i.description}}</div></td>
+                <td>{{i.verdict}}</td>
+                <td>{{i.claimant}}</td>
+                <td>{{i.party}}</td>
+                <td>{{i.topic}}</td>
+                <td>{{i.sub_category}}</td>
+                <td>{{i.source_link}}</td>
+                <td>{{i.verdict_simplified}}</td>
 
-        &nbsp;{{i.individual_id}} {{i.claimant}} &nbsp; {{i.party}}</p>
-    {%endfor%}
-
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
 </body>
 <h2><a href="/home">Home</a></h2>
 </html>
