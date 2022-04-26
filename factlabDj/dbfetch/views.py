@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from dbupdate.models import claim
-
+from django.db.models import Q
 from django.db import connection
 
 
@@ -9,7 +9,6 @@ def dbfetch(request):
     return render(request,'dbfetch.html')
 
 
-from django.db.models import Q
 
 def fetchrecord(request):
 
@@ -138,56 +137,7 @@ def fetchrecord(request):
     print(connection.queries)
     print(type(claim_list))
  
-    #
-    #claimid,project, claim_source, claim, claim_publish_date, claim_receive_date, description, verdict, media_type,media_link_path, claimant, party, topic, sub_category, source_link, who_lodged_info, status,claim.checker_id, checker_name, verdict_simplified FROM claim LEFT JOIN individual ON claim.individual_id = individual.individual_id LEFT JOIN factchecker ON claim.checker_id = factchecker.checker_id")
-    #print(type(x))
-    #cursor = connection.cursor()
-    #cursor.execute(f''' SELECT claim_id,project, claim_source, claim, claim_publish_date, claim_receive_date, description,
-    #       verdict, media_type,media_link_path, claimant, party, topic, sub_category,
-    #        source_link, who_lodged_info, status,claim.checker_id, checker_name, verdict_simplified 
-    #FROM claim
-    #LEFT JOIN individual ON claim.individual_id = individual.individual_id
-    #LEFT JOIN factchecker ON claim.checker_id = factchecker.checker_id
-    #WHERE 
-    #    project = 'TIPLINE' ''')
-    #data = cursor.fetchall()
-    #print(data,type(data))
-    #x = claim.objects.raw(f''' SELECT claimid,project, claim_source, claim, claim_publish_date, claim_receive_date, description,
-    '''       verdict, media_type,media_link_path, claimant, party, topic, sub_category,
-            source_link, who_lodged_info, status,claim.checker_id, checker_name, verdict_simplified 
-    FROM claim
-    LEFT JOIN individual ON claim.individual_id = individual.individual_id
-    LEFT JOIN factchecker ON claim.checker_id = factchecker.checker_id
-    WHERE 
-        project = 'TIPLINE'
-    AND
-        claim_source = 'YOUTUBE'
-    AND
-        claim like '%SENATOR%'
-    AND
-        claim_publish_date >='2017-05-19' AND claim_publish_date <='2017-07-19'
-    AND
-        description like '%SENATOR%'
-    AND
-        verdict = 'FALSE'
-    AND
-        claimant LIKE '%CORY%'
-    AND 
-        party LIKE '%%'
-    AND
-        topic LIKE '%%'
-    AND
-        sub_category LIKE '%%'
-    AND
-        who_lodged_info LIKE '%%'
-    AND
-        status = 'CHECKED'
-    AND
-        claim.checker_id = '2'
-    AND
-        checker_name LIKE '%John Doe%'
-    AND
-        verdict_simplified = 'IN_BETWEEN'  '''
+    
     print(type(claim_list))
     d = {"el":claim_list}
     return render(request, 'results.html',{"body":claim_list})

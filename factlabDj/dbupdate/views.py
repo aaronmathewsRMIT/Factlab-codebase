@@ -1,8 +1,10 @@
 import re
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from numpy import source
 from .models import claim
 from django.db.models import Count
+from django.http import JsonResponse
 
 # Create your views here.
 def dbupdate(request):
@@ -61,3 +63,31 @@ def add_record(request):
         return redirect("/home")
     else:
         return render(request, 'dbupdate.html')
+
+def dbmodify(request):
+    return render(request, 'claimupdate.html')
+
+def update_record(request):
+    
+    claim_id_flag = 0
+    claim_ids =request.POST.get('claim_ids')    
+    if claim_ids == 'ALL':
+        claim_id_flag = 0
+    else:
+        claim_id_flag = 1
+    
+    if claim_id_flag:
+        query =  'SELECT * FROM claim WHERE claim_id IN ('
+        claim_ids = claim_ids.split(',')
+        query = query + ", ".join(claim_ids) + ") AND status = 'UNCHECKED'"
+        print(query)
+        claim_list = claim.objects.raw(query)
+    {"body":claim_list}
+
+    dataList = []
+
+    for i in claim_list:
+	    dataList.append({'claim id':i.claim_id, 'result':i.project, 'id':i.claim_source})
+    print(dataList)
+    return JsonResponse(dataList, safe=False)
+    #return render(request, 'updateform.html',{"body":claim_list})
