@@ -76,12 +76,12 @@ def fetchrecord(request):
 
     myDict = dict(request.POST.lists())
     myDict.pop('csrfmiddlewaretoken')
-    print(myDict, type(myDict))
+    #print(myDict, type(myDict))
     ####
     query_s_flag_dict = {}
     query_l_flag_dict ={}
     query_para_dict = {}
-    print(myDict['project'],type(myDict['project']))
+    #print(myDict['project'],type(myDict['project']))
 
 
     if request.POST.get('project').upper() == 'ANY':
@@ -108,7 +108,7 @@ def fetchrecord(request):
         claim1 = [s.strip() for s in claim1]
         query_para_dict['claim'] = claim1
 
-        print(claim1)
+        #print(claim1)
 
     #query_flag_dict['claim_published_from'] = 1
     claim_published_from = request.POST.get('claim_published_from')
@@ -162,9 +162,9 @@ def fetchrecord(request):
         query_s_flag_dict['status']=1
         query_para_dict['status'] = request.POST.get('status').upper()
 
-    print(query_s_flag_dict)
-    print(query_l_flag_dict)
-    print("$$$$", query_para_dict)
+    #print(query_s_flag_dict)
+    #print(query_l_flag_dict)
+    #print("$$$$", query_para_dict)
     #checklist =['claim','description','topic','subcategory']
     query_l = ""
     for key in query_l_flag_dict:
@@ -176,7 +176,7 @@ def fetchrecord(request):
 
     query_l =query_l[:-4]
     ##print("!!!!!!")
-    print(query_l)        
+    #print(query_l)        
 
     query_s =""
     for key in query_s_flag_dict:
@@ -193,16 +193,16 @@ def fetchrecord(request):
     query = query_s+" "+query_l
     date_query = " claim_publish_date >= '"+claim_published_from +"' AND claim_publish_date <= '"+claim_published_to+"' AND "
     query = " SELECT * FROM claim WHERE "+date_query + query
-    print("&&&&&")
-    print(query)
+    #print("&&&&&")
+    #print(query)
     #query =  " SELECT * FROM claim WHERE project = 'FACEBOOK' AND description SIMILAR TO '%%(SCOTT)%%'"
-    print(query)
+    #print(query)
     claim_list = claim.objects.raw(query)
-    print(connection.queries)
-    print(type(claim_list))
+    #print(connection.queries)
+    #print(type(claim_list))
  
     
-    print(type(claim_list))
+    #print(type(claim_list))
     d = {"el":claim_list}
     return render(request, 'claim_app/results.html',{"body":claim_list})
 
@@ -217,7 +217,6 @@ def loginPage(request):
 
         if user is not None:
             login(request, user)
-            print("Yess")
             return redirect('home')
         
         else:
