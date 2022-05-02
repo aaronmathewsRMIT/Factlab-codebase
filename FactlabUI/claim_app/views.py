@@ -229,15 +229,14 @@ def logoutUser(request):
     logout(request)
     return redirect('login')
 
-'''
+
 @login_required(login_url='login')
 def dbupdate(request):
 
-    form = claimForm()
-    context = {'form':form}
 
-    return render(request,'claim_app/dbupdate.html', context)
-'''
+    return render(request,'claim_app/dbupdate.html')
+
+
 @login_required(login_url='login')
 def dbfetch(request):
     return render(request, 'claim_app/dbfetch.html')
