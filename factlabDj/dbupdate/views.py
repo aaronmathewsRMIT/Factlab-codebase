@@ -6,6 +6,7 @@ from .models import claim
 from django.db.models import Count
 from django.http import JsonResponse
 
+
 # Create your views here.
 def dbupdate(request):
     return render(request,'dbupdate.html')
@@ -18,7 +19,6 @@ def add_record(request):
         claim_source = request.POST.get('source')
         claim1 = request.POST.get('claim')
         claim_published = request.POST.get('claim_published')
-        print(claim_published)
         claim_received = request.POST.get('claim_received')
         description = request.POST.get('description')
         verdict = request.POST.get('verdict')
@@ -39,24 +39,24 @@ def add_record(request):
 
 
         #claim table
-        c.project = project.upper()
-        c.claim_source = claim_source.upper()
-        c.claim = claim1.upper()
+        c.project = project.upper().strip()
+        c.claim_source = claim_source.upper().strip()
+        c.claim = claim1.upper().strip()
         c.claim_publish_date = claim_published
         c.claim_receive_date = claim_received
-        c.description = description.upper()
-        c.verdict = verdict.upper()
-        c.media_type = mediatype.upper()
-        c.media_link_path = media_link_int
-        c.claimant = claimant.upper()
-        c.party = party.upper()
-        c.topic = topic.upper()
-        c.sub_category = subcategory.upper()
-        c.source_link = media_link_ext
-        c.who_lodged_info = wholodgeinfo.upper()
-        c.status = status.upper()
-        c.checker_name = checker_name.upper()
-        c.verdict_simplified = verdictsimplified.upper()
+        c.description = description.upper().strip()
+        c.verdict = verdict.upper().strip()
+        c.media_type = mediatype.upper().strip()
+        c.media_link_path = media_link_int.strip()
+        c.claimant = claimant.upper().strip()
+        c.party = party.upper().strip()
+        c.topic = topic.upper().strip()
+        c.sub_category = subcategory.upper().strip()
+        c.source_link = media_link_ext.strip()
+        c.who_lodged_info = wholodgeinfo.upper().strip()
+        c.status = status.upper().strip()
+        c.checker_name = checker_name.upper().strip()
+        c.verdict_simplified = verdictsimplified.upper().strip()
 
         c.save()        
 
