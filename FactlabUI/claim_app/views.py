@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 
 from claim_app.decorators import unauthenticated_user
-from .forms import claimForm
+#from .forms import claimForm
 from .models import claim
 from .filters import Searchclaim
 from .decorators import unauthenticated_user
@@ -229,6 +229,7 @@ def logoutUser(request):
     logout(request)
     return redirect('login')
 
+'''
 @login_required(login_url='login')
 def dbupdate(request):
 
@@ -236,7 +237,7 @@ def dbupdate(request):
     context = {'form':form}
 
     return render(request,'claim_app/dbupdate.html', context)
-
+'''
 @login_required(login_url='login')
 def dbfetch(request):
     return render(request, 'claim_app/dbfetch.html')
