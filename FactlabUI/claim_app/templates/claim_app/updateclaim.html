@@ -1,0 +1,81 @@
+{% extends 'claim_app/main.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet"  type="text/css" href = "{% static '/css/style.css' %}">
+
+<style>
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+      width: 100%;
+      border: 1px solid black;
+      border-style: solid;
+    }
+    
+    th, td {
+      text-align: left;
+      padding: 8px;
+      border: 1px solid black;
+      border-radius: 25px;
+      border-style: solid;
+    }
+    
+    </style>
+<body style="background-color:white">
+    <h1> Claim Result Table</h1>
+    <form method ='get'>
+            {{myFilter.form}}
+        <button class = "btn btn-primary" type="submit">
+            Search</button>
+
+    </form>
+    <div style="overflow-x:auto;">
+        <table height = 100px; width =1000px class="rwd-table">
+            <tr width="10%">
+                <th></th>
+                <th>Claim ID</th>
+                <th>Project</th>
+                <th>Claim Source</th>
+                <th>Claim</th>
+                <th>Claim publish date</th>
+                <th>Description</th>
+                <th>Verdict</th>
+                <th>Claimant</th>
+                <th>Party</th>
+                <th>Topic</th>
+                <th>Subcategory</th>
+                <th>Source link</th>
+                <th>Status</th>
+                <th>Verified Simplified</th>
+            </tr>
+            {%for i in claims%}
+            <tr>    
+                <td><a class="btn btn-sm btn-info" href="{% url 'updateorder' i.claim_id  %}">Update</a></td>
+                <td>{{i.claim_id}}</td>
+                <td>{{i.project}}</td>
+                <td>{{i.claim_source}}</td>
+                <td style="height:50px;width:5000px"><div class=scrollable>{{i.claim}}</div></td>
+                <td style="width:50px"><time datetime="DD-MM-YYYY hh:mm">{{i.claim_publish_date}}</time></td>
+                <td style="height:50px; width:100px"><div class=scrollable>{{i.description}}</div></td>
+                <td>{{i.verdict}}</td>
+                <td>{{i.claimant}}</td>
+                <td>{{i.party}}</td>
+                <td>{{i.topic}}</td>
+                <td>{{i.sub_category}}</td>
+                <td>{{i.source_link}}</td>
+                <td>{{i.status}}</td>
+                <td>{{i.verdict_simplified}}</td>
+
+
+
+            </tr>
+            {%endfor%}
+        </table>
+    </div>
+</body>
+
+
+
+
+{% endblock %}

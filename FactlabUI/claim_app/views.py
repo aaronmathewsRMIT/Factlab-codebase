@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 
 from claim_app.decorators import unauthenticated_user
-#from .forms import claimForm
+from .forms import ClaimForm
 from .models import claim
-from .filters import Searchclaim
+from .filters import claimFilter
 from .decorators import unauthenticated_user
 from django.db import connection
 
@@ -68,7 +68,7 @@ def add_record(request):
 
         return redirect("/home")
     else:
-        return render(request, 'claim_app/dbupdate.html')
+        return render(request, 'claim_app/addclaim.html')
 
 @login_required(login_url='login')
 def fetchrecord(request):
@@ -230,10 +230,10 @@ def logoutUser(request):
 
 
 @login_required(login_url='login')
-def dbupdate(request):
+def addclaim(request):
 
 
-    return render(request,'claim_app/dbupdate.html')
+    return render(request,'claim_app/addclaim.html')
 
 
 @login_required(login_url='login')
@@ -246,3 +246,27 @@ def dbsearchNew(request):
 
     context = {"myFilter":myFliter}
     return render(request, 'claim_app/a.html',context)
+
+@login_required(login_url='login')
+def updaterecord(request):
+    
+    claims = claim.objects.filter(status = 'UNCHECKED')
+    #print(claims)
+    
+    myFilter = claimFilter(request.GET, queryset=claims)
+    claims = myFilter.qs
+    context = {'claims':claims, 'myFilter':myFilter }
+    return render(request, 'claim_app/updateclaim.html', context)
+
+@login_required(login_url='login')
+def updateClaim(request,pk):
+    claims = claim.objects.get(claim_id = pk)
+    form = ClaimForm(instance=claims)
+    
+    if request.method == 'POST':
+        form = ClaimForm(request.POST,instance=claims)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+    context = {'form':form}
+    return render(request, 'claim_app/updateform.html', context)

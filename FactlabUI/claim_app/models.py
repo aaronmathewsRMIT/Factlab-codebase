@@ -60,7 +60,7 @@ class claim(models.Model):
     sub_category = models.CharField(max_length=100,null=True, blank=True)
     source_link = models.CharField(max_length=100,null=True, blank=True)
     who_lodged_info = models.CharField(max_length=50,null=True, blank=True)
-    status = models.CharField(max_length=9,null=True, blank=True, choices = STATUS)
+    status = models.CharField(max_length=9, choices = STATUS)
     checker_name = models.CharField(max_length=50,null=True, blank=True)
     verdict_simplified = models.CharField(max_length=10,null=True, blank=True, choices= VERDICT_SIMPLIFIED)
     
